@@ -26,3 +26,17 @@ The project is designed as a **practical playground** for exploring modern appro
 ---
 
 *Author: Vasilii Bondin*  
+
+## Project Structure
+
+```
+/src/           # source code
+  data/         # ingestion and preprocessing scripts
+  models/       # neural networks and baseline models
+  calib/        # SABR/SVI calibration routines
+  hedge/        # reinforcement learning environment and agents
+/notebooks/     # Jupyter notebooks for research and experiments
+/tests/         # unit tests
+/reports/       # generated reports (PDF, DOCX, Markdown)
+/data/          # raw and processed datasets (excluded from git)
+```
