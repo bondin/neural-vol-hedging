@@ -1,4 +1,4 @@
-# Project PlanX — TODO List
+# Project neural-vol-hedging — TODO List
 
 - [ ] Week 1 (Oct 1–7, 2025): Repository setup, Docker environment, CI, Deribit ingestion, first IV smiles.  
 - [ ] Week 2 (Oct 8–14, 2025): SABR/SVI calibration, no-arbitrage checks, baseline reports.  
