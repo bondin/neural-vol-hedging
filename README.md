@@ -40,3 +40,5 @@ The project is designed as a **practical playground** for exploring modern appro
 /reports/       # generated reports (PDF, DOCX, Markdown)
 /data/          # raw and processed datasets (excluded from git)
 ```
+
+See the full [TODO list](TODO.md) for weekly tasks.
