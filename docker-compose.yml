@@ -2,6 +2,8 @@ version: "3.9"
 
 x-common: &common
   working_dir: /app
+  ports:
+    - "8888:8888"
   volumes:
     - ./:/app
     - ./data:/app/data
