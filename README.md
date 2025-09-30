@@ -42,3 +42,43 @@ The project is designed as a **practical playground** for exploring modern appro
 ```
 
 See the full [TODO list](TODO.md) for weekly tasks.
+
+---
+
+## 🚀 Installation & Usage
+
+### 1. Build images
+```bash
+docker compose build        # build CPU service
+docker compose build gpu    # build GPU service
+```
+
+### 2. Run container
+```bash
+docker compose run cpu bash     # CPU container
+docker compose run gpu bash     # GPU container (requires NVIDIA Container Toolkit)
+```
+
+### 3. Run Jupyter Lab
+```bash
+make jupyter        # start Jupyter Lab on CPU (http://localhost:8888)
+make jupyter-gpu    # start Jupyter Lab on GPU
+```
+
+### 4. Run tests & lint
+```bash
+make test
+make lint
+make format
+make pre-commit
+```
+
+### 5. Clean up
+```bash
+make clean
+```
+
+---
+
+📌 With `docker compose` and `Makefile`, all data is mounted from the local `./data` folder into the container at `/app/data`.  
+This ensures that large datasets are not baked into the image.
