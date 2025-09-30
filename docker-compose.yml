@@ -1,0 +1,31 @@
+version: "3.9"
+
+x-common: &common
+  working_dir: /app
+  volumes:
+    - ./:/app
+    - ./data:/app/data
+  stdin_open: true
+  tty: true
+
+services:
+  cpu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: projectx-cpu
+    <<: *common
+
+  gpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    container_name: projectx-gpu
+    <<: *common
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
