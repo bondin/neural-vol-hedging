@@ -1,0 +1,44 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints
+.notebooks/
+
+# Data (raw and processed)
+data/
+*.parquet
+*.csv
+*.h5
+*.db
+
+# Reports
+reports/
+*.pdf
+*.docx
+*.md
+
+# Logs
+*.log
+
+# Git
+.git/
+.gitignore
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
