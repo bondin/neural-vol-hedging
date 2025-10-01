@@ -1,0 +1,40 @@
+repos:
+  # Black: автоформатирование кода
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+        language_version: python3.11
+
+  # isort: сортировка импортов
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        language_version: python3.11
+
+  # Ruff: быстрый линтер (замена flake8 + pyflakes + pylint частично)
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.1.13
+    hooks:
+      - id: ruff
+        args: [--fix]   # автофикс простых ошибок
+        language_version: python3.11
+
+  # Mypy: статическая типизация
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.6.1
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-requests]
+        language_version: python3.11
+
+  # Pytest (минимальные smoke-тесты перед коммитом)
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest -q
+        language: system
+        types: [python]
+        pass_filenames: false
