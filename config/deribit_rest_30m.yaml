@@ -1,0 +1,24 @@
+
+# Project X — Deribit REST 30-min Snapshot + Smiles (concurrent)
+schedule:
+  interval_minutes: 30
+universe:
+  currencies: ["BTC", "ETH"]
+  kind: "option"
+  expired: false
+filters:
+  max_instruments: 10000
+io:
+  data_root: "./data"
+  raw_dir: "raw/deribit"
+  processed_dir: "processed/deribit"
+  parquet:
+    compression: "zstd"
+    row_group_size: 200000
+    use_dictionary: true
+runtime:
+  max_concurrency: 8
+  per_request_delay_ms: 80
+  request_timeout_s: 15
+logging:
+  level: "INFO"

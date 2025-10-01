@@ -25,9 +25,11 @@ repos:
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.6.1
     hooks:
-      - id: mypy
-        additional_dependencies: [types-requests]
-        language_version: python3.11
+    - id: mypy
+      additional_dependencies:
+      - types-requests
+      - types-PyYAML
+      language_version: python3.11
 
   # Pytest (минимальные smoke-тесты перед коммитом)
   - repo: local
