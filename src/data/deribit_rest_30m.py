@@ -334,18 +334,8 @@ def write_outputs(cfg: Config, df_raw: pd.DataFrame):
         "Smiles summary   | slot=%s | smiles_rows=%d", slot_time.isoformat(), n_smiles
     )
 
-    for (under, exp), dsub in smiles.groupby(["underlying", "expiry_utc"]):
-        exp_part = (
-            pd.to_datetime(exp, utc=True).strftime("%Y-%m-%dT%H:%M:%SZ")
-            if pd.notna(exp)
-            else "NA"
-        )
-        out_dir = (
-            proc_root
-            / f"date={date_str}"
-            / f"underlying={under}"
-            / f"expiry={exp_part}"
-        )
+    for under, dsub in smiles.groupby("underlying"):
+        out_dir = proc_root / f"date={date_str}" / f"underlying={under}"
         out_dir.mkdir(parents=True, exist_ok=True)
         out_file = out_dir / f"smile_{ts_str}_{under}.parquet"
         write_parquet(
