@@ -384,7 +384,7 @@ def main():
     setup_logging(level=(args.log_level or "INFO"))
     cfg = Config.from_yaml(args.config)
 
-    if True:
+    if args.once:
         df = asyncio.run(snapshot_once(cfg))
         write_outputs(cfg, df)
     else:
