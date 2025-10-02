@@ -100,6 +100,8 @@ class Config:
     max_concurrency: int
     per_request_delay_ms: int
     request_timeout_s: int
+    max_retries: int
+    retry_delay_ms: int
 
     @staticmethod
     def from_yaml(path: str) -> "Config":
@@ -120,6 +122,8 @@ class Config:
             max_concurrency=int(y["runtime"]["max_concurrency"]),
             per_request_delay_ms=int(y["runtime"]["per_request_delay_ms"]),
             request_timeout_s=int(y["runtime"]["request_timeout_s"]),
+            max_retries=int(y["runtime"]["max_retries"]),
+            retry_delay_ms=int(y["runtime"]["retry_delay_ms"]),
         )
 
 
@@ -225,11 +229,16 @@ async def gather_order_books(
 
     async def worker(under: str, inst: str):
         async with sem:
-            try:
-                ob = await fetch_order_book(client, inst)
-                rows.append(make_row(slot_time, under, inst, ob))
-            except Exception as e:
-                log.warning("order_book failed for %s: %s", inst, e)
+            retry_count = 0
+            while retry_count < cfg.max_retries:
+                try:
+                    ob = await fetch_order_book(client, inst)
+                    rows.append(make_row(slot_time, under, inst, ob))
+                    break
+                except Exception as e:
+                    log.warning("order_book failed for %s: %s", inst, e)
+                    retry_count += 1
+                    await asyncio.sleep(cfg.retry_delay_ms / 1000.0)
 
     delay = cfg.per_request_delay_ms / 1000.0
     tasks = []

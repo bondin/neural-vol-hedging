@@ -18,7 +18,9 @@ io:
     use_dictionary: true
 runtime:
   max_concurrency: 8
-  per_request_delay_ms: 80
+  per_request_delay_ms: 250
   request_timeout_s: 15
+  max_retries: 15
+  retry_delay_ms: 1000
 logging:
   level: "INFO"
