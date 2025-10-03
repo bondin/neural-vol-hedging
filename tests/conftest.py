@@ -6,7 +6,12 @@ import os
 import pandas as pd
 import pytest
 
-pytest.skip("no data in CI", allow_module_level=True) if os.getenv("CI") else None
+
+def pytest_collection_modifyitems(config, items):
+    if os.getenv("CI"):
+        mark = pytest.mark.skip(reason="no data in CI")
+        for item in items:
+            item.add_marker(mark)
 
 
 def _find_latest_parquet(default_glob: str) -> str:
