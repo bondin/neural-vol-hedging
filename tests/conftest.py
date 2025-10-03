@@ -6,6 +6,8 @@ import os
 import pandas as pd
 import pytest
 
+pytest.skip("no data in CI", allow_module_level=True) if os.getenv("CI") else None
+
 
 def _find_latest_parquet(default_glob: str) -> str:
     files = glob.glob(default_glob, recursive=True)
