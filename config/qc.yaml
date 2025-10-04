@@ -1,0 +1,7 @@
+qc:
+  spread_rel_max: 0.25
+  volume_min: 1.0
+  iv_min: 0.01
+  iv_max: 5.0
+  moneyness_min: 0.5
+  moneyness_max: 1.5
